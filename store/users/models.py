@@ -10,6 +10,7 @@ class User(AbstractUser):
     image = models.ImageField(upload_to='users_image', null=True, blank=True)
     is_verified_email = models.BooleanField(default=False)
 
+
 class EmailVerification(models.Model):
     code = models.UUIDField(unique=True)
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
@@ -35,5 +36,6 @@ class EmailVerification(models.Model):
             recipient_list=(self.user.email,),
             fail_silently=False,
         )
+
     def is_expired(self):
         return True if now() >= self.expiration else False

@@ -11,6 +11,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from common.views import TitleMixin
 from django.contrib.messages.views import SuccessMessageMixin
 
+
 class UserLoginView(LoginView):
     template_name = 'users/login.html'
     form_class = UserLoginForm
