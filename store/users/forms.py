@@ -6,6 +6,7 @@ from datetime import timedelta
 from django.utils.timezone import now
 from users.tasks import send_email_verification
 
+
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control py-4', 'placeholder': 'Enter name for user'}))
