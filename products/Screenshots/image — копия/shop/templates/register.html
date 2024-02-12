@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<center>
+   <form action="/register" method="post" class="form-contact">
+   <p><label class="textregisterlogin">Name: </label> <input type="text" name="name" value="" requied />
+   <p><label class="textregisterlogin">Email: </label> <input type="text" name="email" value="" requied />
+   <p><label class="textregisterlogin">Password: </label> <input type="password" name="psw" value="" requied />
+   <p><label class="textregisterlogin">Repeat password: </label> <input type="password" name="psw2" value="" requied />
+   <p><input class="textregisterloginblack" type="submit" value="Register" />
+   </form>
+</center>
+{% endblock %}

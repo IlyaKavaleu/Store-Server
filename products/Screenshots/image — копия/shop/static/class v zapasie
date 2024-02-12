@@ -1,0 +1,19 @@
+@app.route('/create', methods=['POST', 'GET'])
+def create():
+    if request.method == 'POST':
+        title = request.form['title']
+        price = request.form['price']
+        text = request.form['text']
+        model = request.form['model']
+        rozmiar = request.form['rozmiar']
+        email = request.form['email']
+        kontakt = request.form['kontakt']
+        item = Item(title=title, price=price, text=text, model=model, rozmiar=rozmiar, email=email, kontakt=kontakt)
+        try:
+            db.session.add(item)
+            db.session.commit()
+            return redirect('/products')
+        except:
+            return "You have error!"
+    else:
+        return render_template('create.html')

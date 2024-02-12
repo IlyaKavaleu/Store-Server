@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}
+   <title>Na temat sklepa</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+   <h1>Na temat sklepa</h1>
+   <p>Nasz internet-sklep!</p>
+   <!--<a href="/buy/{{ id }}" type="button" class="w-100 btn btn-lg btn-outline-primary">Zamowic</a> -->
+
+<div class="container">
+  <div class="card-deck mb-3 text-centre">
+      {% if data %}
+     <div class="card mb-4 rounded-3 shadow-sm">
+      <div class="card-header py-3">
+        <h4 class="my-0 fw-normal">{{ data.title }}</h4>
+      </div>
+
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">{{ data.price }} <small class="text-muted fw-light"> zlotych</small></h1>
+          <h1 class="card-title pricing-card-title">{{ data.text }} <small class="text-muted fw-light"></small></h1>
+
+        <ul class="list-unstyled mt-3 mb-4">
+          <li><h1 class="card-title pricing-card-title">Model <small class="text-muted fw-light">{{ data.model }}</small></h1></li>
+          <li><h1 class="card-title pricing-card-title">Rozmiar <small class="text-muted fw-light">{{ data.rozmiar }}</small></h1></li>
+            <li><h1 class="card-title pricing-card-title">Email <small class="text-muted fw-light">{{ data.email }}</small></h1>
+          <li><h1 class="card-title pricing-card-title">Kontakt <small class="text-muted fw-light">{{ data.kontakt }}</small></h1></li>
+            <img src='../static//img/trampki.png' width="300" height="200">           <img src='../static//img/trampki.png' width="300" height="200">
+
+        </ul>
+        <a href="/buy/{{ data.id }}" type="button" class="w-100 btn btn-lg btn-outline-primary">Zamow product</a>
+      </div>
+          {% endif %}
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
