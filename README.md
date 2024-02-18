@@ -4,7 +4,6 @@ The project for study Django.
 
 #### Stack:
 
-- API
 - [Python](https://www.python.org/downloads/)
 - [PostgreSQL](https://www.postgresql.org/)
 - [Redis](https://redis.io/)
