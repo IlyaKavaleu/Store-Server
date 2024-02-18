@@ -10,6 +10,8 @@ The project for study Django.
 - [Django Rest Framework](https://www.django-rest-framework.org/)
 - [Stripe](https://docs.stripe.com/)
 - [BOOTSTRAP](https://getbootstrap.com/docs/4.1/getting-started/introduction/)
+- [Redis](https://redis.io/docs/)
+- [CELERY](https://docs.celeryq.dev/en/stable/)
 
   
 
