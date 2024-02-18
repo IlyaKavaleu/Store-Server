@@ -8,6 +8,7 @@ The project for study Django.
 - [PostgreSQL](https://www.postgresql.org/)
 - [Redis](https://redis.io/)
 - [Django Rest Framework](https://www.django-rest-framework.org/)
+- [Stripe](https://docs.stripe.com/)
   
 
 ## Local Developing
