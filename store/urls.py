@@ -34,8 +34,7 @@ urlpatterns = [
     path('api-token-auth/', obtain_auth_token),
 ]
 
-
-#if we in devop no prodaction
+# if we in devop no prodaction
 if settings.DEBUG == True:
     urlpatterns.append(path('__debug__/', include('debug_toolbar.urls')))
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

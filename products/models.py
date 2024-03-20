@@ -90,10 +90,11 @@ class Basket(models.Model):
 
     @classmethod
     def create_or_update(cls, product_id, user):
-        baskets = Basket.objects.filter(user=user, product_id=product_id)  # if this obj not you create him
+        product = Product.objects.get(id=product_id)
+        baskets = Basket.objects.filter(user=user, product_id=product)  # if this obj not you create him
 
         if not baskets.exists():
-            obj = Basket.objects.create(user=user, product_id=product_id, quantity=1)
+            obj = Basket.objects.create(user=user, product_id=product, quantity=1)
             is_created = True
             return obj, is_created
         else:
@@ -102,4 +103,3 @@ class Basket(models.Model):
             basket.save()
             is_created = False
             return basket, is_created
-

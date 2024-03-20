@@ -29,8 +29,8 @@ class UserRegistrationViewTestCase(TestCase):
     def test_user_register_post_success(self):
         username = self.data['username']
         self.assertFalse(User.objects.filter(username=username).exists())
-        response = self.client.post(self.path, self.data)
 
+        response = self.client.post(self.path, self.data)
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertRedirects(response, reverse('users:login'))
         self.assertTrue(User.objects.filter(username=username).exists())

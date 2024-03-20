@@ -36,5 +36,6 @@ class EmailVerification(models.Model):
             recipient_list=(self.user.email,),
             fail_silently=False,
         )
+
     def is_expired(self):
         return True if now() >= self.expiration else False

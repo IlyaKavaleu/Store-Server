@@ -38,7 +38,6 @@ env = environ.Env(
     STRIPE_WEBHOOK_SECRET=(str),
 )
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(os.path.join(BASE_DIR / '.env'))
@@ -58,7 +57,7 @@ DOMAIN_NAME = env('DOMAIN_NAME')
 
 # Application definition
 INSTALLED_APPS = [
-    #django
+    # django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -68,7 +67,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.humanize',
 
-    #allauth
+    # allauth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -78,11 +77,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
 
-    #project
+    # project
     'products',
     'users',
     'orders',
-    'api',
+    'api'
 ]
 
 MIDDLEWARE = [
@@ -118,17 +117,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'store.wsgi.application'
 
-
 INTERNAL_IPS = [
     '127.0.0.1',
     'localhost'
 ]
 
-#REDIS
+# REDIS
 REDIS_HOST = env('REDIS_HOST')
 REDIS_PORT = env('REDIS_PORT')
 
-#CACHE
+# CACHE
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
@@ -147,9 +145,8 @@ DATABASES = {
         'PASSWORD': env('DATABASE_PASSWORD'),
         'HOST': env('DATABASE_HOST'),
         'PORT': env('DATABASE_PORT'),
-        }
     }
-
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -169,7 +166,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -177,11 +173,9 @@ LANGUAGE_CODE = 'en-en'
 
 TIME_ZONE = 'UTC'
 
-
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -193,7 +187,6 @@ if DEBUG:
 else:
     STATIC_ROOT = BASE_DIR / 'static'
 
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -203,7 +196,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Users
-AUTH_USER_MODEL = 'users.User'    #!!!!!!!!!!
+AUTH_USER_MODEL = 'users.User'  # !!!!!!!!!!
 LOGIN_URL = '/users/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
@@ -217,12 +210,10 @@ else:
     EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
     EMAIL_USE_SSL = env('EMAIL_USE_SSL')
 
-
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
-    ]
-
+]
 
 SITE_ID = 2
 
@@ -234,19 +225,16 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-
-#Celery
+# Celery
 CELERY_BROKER_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}'
 CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:{REDIS_PORT}'
 
-
-#Stripe
+# Stripe
 STRIPE_PUBLIC_KEY = env('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
 STRIPE_WEBHOOK_SECRET = env('STRIPE_WEBHOOK_SECRET')
 
-
-#RESTREST
+# REST
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 3,

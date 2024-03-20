@@ -58,6 +58,7 @@ class OrderCreateView(TitleMixin, CreateView):
     def post(self, request, *args, **kwargs):
         super(OrderCreateView, self).post(request, *args, **kwargs)
         baskets = Basket.objects.filter(user=self.request.user)
+
         checkout_session = stripe.checkout.Session.create(
             line_items=baskets.stripe_products(),
             metadata={'order_id': self.object.id},

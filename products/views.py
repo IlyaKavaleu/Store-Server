@@ -40,7 +40,7 @@ class ProductsListView(TitleMixin, ListView):
 
 @login_required
 def basket_add(request, product_id):
-    Basket.create_or_update(product_id, request.user)
+    Basket.create_or_update(product_id=product_id, user=request.user)
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 
