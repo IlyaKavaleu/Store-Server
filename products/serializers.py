@@ -1,5 +1,6 @@
 from rest_framework import serializers, fields
 from products.models import Product, ProductCategory, Basket
+from django.db.models import Sum
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -8,18 +9,18 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ('name', 'description', 'price', 'quantity', 'image', 'category')
+        fields = ('id', 'name', 'description', 'price', 'quantity', 'image', 'category')
 
 
 class BasketSerializer(serializers.ModelSerializer):
     product = ProductSerializer()
     sum = fields.FloatField(required=False)
-    price_all_products = fields.SerializerMethodField()
-    sum_all_products = fields.SerializerMethodField()
+    price_all_products = fields.SerializerMethodField(required=False)
+    sum_all_products = fields.SerializerMethodField(required=False)
 
     class Meta:
         model = Basket
-        fields = ('id', 'product', 'quantity', 'sum', 'price_all_products', 'sum_all_products', 'created_timestamp')
+        fields = ('product', 'quantity', 'sum', 'price_all_products', 'sum_all_products', 'created_timestamp')
         read_only_fields = ('created_timestamp',)
 
     def get_price_all_products(self, obj):

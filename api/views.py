@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from rest_framework import status
+from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView, UpdateAPIView, RetrieveAPIView, \
+    GenericAPIView, get_object_or_404, ListCreateAPIView
+from rest_framework.mixins import RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
 from rest_framework.response import Response
-
 from products.serializers import ProductSerializer, Product, BasketSerializer, Basket
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ModelViewSet, ViewSet
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 
@@ -11,10 +13,20 @@ class ProductModelViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
-    def get_permissions(self):
-        if self.action in ['create', 'update', 'destroy']:
-            self.permission_classes = (IsAdminUser, )
-        return super(ProductModelViewSet, self).get_permissions()
+
+class ProductDetailViewSet(ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = (IsAuthenticated, )
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
 
 
 class BasketModelViewSet(ModelViewSet):
@@ -28,14 +40,14 @@ class BasketModelViewSet(ModelViewSet):
         return queryset.filter(user=self.request.user)
 
     def create(self, request, *args, **kwargs):
-        try:
-            product_id = request.data['product_id']
-            products = Product.objects.filter(id=product_id)
-            if not products.exists():
-                return Response({'product_id': 'Does not exist!'}, status=status.HTTP_400_BAD_REQUEST)
-            obj, is_created = Basket.create_or_update(products.first().id, self.request.user)
-            status_code = status.HTTP_201_CREATED if is_created else status.HTTP_200_OK
-            serializer = self.get_serializer(obj)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        except KeyError:
-            return Response({'product': 'Not required!'})
+        print(request.data)
+        product_id = request.data['product_id']
+        print(product_id)
+        products = Product.objects.filter(id=product_id)
+        print(products)
+        if not products.exists():
+            return Response({'product_id': 'This obj does not exists!'}, status=status.HTTP_400_BAD_REQUEST)
+        obj, is_created = Basket.create_or_update(products.first().id, self.request.user)
+        serializer = self.get_serializer(obj)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
